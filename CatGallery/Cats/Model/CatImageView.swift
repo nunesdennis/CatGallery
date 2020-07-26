@@ -8,41 +8,38 @@
 
 import UIKit
 
-let imageCache = NSCache<NSString, UIImage>()
-
 class CatImageView: UIImageView {
 	
-	private var sessionTask: URLSessionDataTask?
-	
-	func cancelLoading() {
-		sessionTask?.cancel()
-	}
-	
-	func loadImage(withId id:String, andURL url: URL) {
-		
-		let id = id as NSString
-		
-		if let imageFromCache = imageCache.object(forKey: id) {
-			DispatchQueue.main.async {
-				self.image = imageFromCache
-			}
-			return
-		}
-		
-		sessionTask = URLSession.shared.dataTask(with: url) { data, response, error in
+	static let shared: URLSession = CatImageView.configureSession()
 
-			DispatchQueue.main.async {
-				if error != nil {
-					return
-				}
-				
-				if let data = data, let image = UIImage(data: data) {
-					imageCache.setObject(image, forKey: id)
-					self.image = image
-				}
-			}
-		}
+    static private func configureSession() -> URLSession {
+        let configuration = URLSessionConfiguration.default
+		let oneMB = 1 * 1024 * 1024
+        let eightyMB = 20 * 1024 * 1024
 		
-		sessionTask?.resume()
+		let cache = URLCache(memoryCapacity: oneMB, diskCapacity: eightyMB, diskPath: nil)
+        configuration.urlCache = cache
+        
+		return URLSession(configuration: configuration)
+    }
+	
+	func loadImage(imageString: String) -> URLSessionTask?{
+		
+		guard let imageURL = URL(string: imageString) else {
+            return nil
+        }
+
+        let imageDownloadTask = CatImageView.shared.dataTask(with: imageURL, completionHandler: { [weak self] (data, _, _) -> Void in
+            guard let data = data, let image = UIImage(data: data), let self = self else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.image = image
+            }
+        })
+        imageDownloadTask.resume()
+
+        return imageDownloadTask
 	}
 }

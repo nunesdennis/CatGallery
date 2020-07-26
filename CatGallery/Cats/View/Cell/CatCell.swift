@@ -15,6 +15,7 @@ class CatCell: UICollectionViewCell {
 	static let identifier = "catCell"
     static let nib: UINib = UINib(nibName: "CatCell", bundle: Bundle.main)
 	static let imageThread = DispatchQueue(label: "queuename", attributes: .concurrent)
+	private var imageTask: URLSessionTask?
 	
 	@IBOutlet weak var catImageView: CatImageView!
 	@IBOutlet weak var titleLabel: UILabel!
@@ -25,17 +26,17 @@ class CatCell: UICollectionViewCell {
 	
 	override func prepareForReuse() {
 		catImageView.image = .catPlaceHolder
-		catImageView.cancelLoading()
+		imageTask?.cancel()
+        imageTask = nil
 		titleLabel.text = ""
 	}
 	
 	func prepare(with presenter: CatsCellPresenter) {
 		titleLabel.text = presenter.title
-		let id = presenter.id
-		guard let imageUrl = URL(string: presenter.imageUrl) else { return }
+		let imageStr = presenter.imageUrl
 
-		CatCell.imageThread.async {
-			self.catImageView.loadImage(withId: id, andURL: imageUrl)
+		CatCell.imageThread.sync {
+			self.imageTask = self.catImageView.loadImage(imageString: imageStr)
 		}
 	}
 }
