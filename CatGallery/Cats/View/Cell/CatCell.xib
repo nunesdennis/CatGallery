@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CatCell" customModule="CatGallery" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="194" height="172"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="194" height="172"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="catPlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="JBU-wf-Ayo" customClass="CatImageView" customModule="CatGallery" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="194" height="172"/>
+                        <color key="backgroundColor" red="1" green="0.39607843139999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuG-Gb-P5A">
+                        <rect key="frame" x="1" y="150.5" width="192" height="20.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="JBU-wf-Ayo" firstAttribute="trailing" secondItem="TuG-Gb-P5A" secondAttribute="trailing" constant="1" id="2o7-MV-iFk"/>
+                <constraint firstItem="JBU-wf-Ayo" firstAttribute="bottom" secondItem="TuG-Gb-P5A" secondAttribute="bottom" constant="1" id="B3V-vx-Pm8"/>
+                <constraint firstAttribute="bottom" secondItem="JBU-wf-Ayo" secondAttribute="bottom" id="CRL-lv-H2c"/>
+                <constraint firstAttribute="trailing" secondItem="JBU-wf-Ayo" secondAttribute="trailing" id="ED8-6t-GIU"/>
+                <constraint firstItem="TuG-Gb-P5A" firstAttribute="leading" secondItem="JBU-wf-Ayo" secondAttribute="leading" constant="1" id="bKy-gb-9cQ"/>
+                <constraint firstItem="JBU-wf-Ayo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="m9a-BN-Tmn"/>
+                <constraint firstItem="JBU-wf-Ayo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ygN-2N-lqO"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="194" height="172"/>
+            <connections>
+                <outlet property="catImageView" destination="JBU-wf-Ayo" id="ica-gu-SuL"/>
+                <outlet property="titleLabel" destination="TuG-Gb-P5A" id="iIs-Cs-OYU"/>
+            </connections>
+            <point key="canvasLocation" x="123.18840579710145" y="57.589285714285708"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="catPlaceHolder" width="541" height="458"/>
+    </resources>
+</document>
